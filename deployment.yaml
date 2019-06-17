@@ -14,6 +14,6 @@ spec:
         spec:
             containers:
                 - name: demo
-                  image: localhost:5000/demo
+                  image: batistamateus/demo
                   ports:
                       - containerPort: 1908
