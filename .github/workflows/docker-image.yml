@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build with Maven
 
 on:
   workflow_dispatch:
@@ -8,15 +8,22 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: batistamateus/demo
-          tags: teste-actions
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Build with Maven
+      run: mvn -B clean package --file pom.xml
+    - name: Copy to target directory
+      run: mkdir target && cp target/*.jar target
+    - name: Print directory files
+      run: ls ${HOME}
