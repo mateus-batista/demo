@@ -1,4 +1,4 @@
 FROM openjdk:8-jdk-alpine
-COPY ${HOME}/staging/*.jar /opt/lib/
+COPY ${HOME}/staging/*.jar /opt/lib/app.jar
 ENTRYPOINT ["/usr/bin/java"]
-CMD ["-jar", "/opt/lib/demo-0.0.1-SNAPSHOT.jar"]
+CMD ["-jar", "/opt/lib/app.jar"]
