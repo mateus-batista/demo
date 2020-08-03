@@ -24,7 +24,7 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
-          dockerfile: /demo/app-bundle/Dockerfile
+          dockerfile: ${{path}}/app-bundle/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: batistamateus/demo
