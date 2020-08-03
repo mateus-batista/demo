@@ -24,6 +24,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean package --file pom.xml
     - name: Copy to target directory
-      run: mkdir target && cp target/*.jar target
+      run: mkdir staging && cp target/*.jar staging
     - name: Print directory files
       run: ls ${HOME}
